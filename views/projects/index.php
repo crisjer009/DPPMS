@@ -60,8 +60,17 @@
                 <div class="col-sm-4"><div class="detail-label">Updated At</div><div id="detail-project-updated-at"></div></div>
             </div>
             <hr class="my-4">
-            <div class="eyebrow">TASK SUMMARY</div><h3 class="h6 mt-1">Project tasks</h3>
-            <div class="empty-state mt-3"><div class="empty-icon"><i class="fa-solid fa-list-check"></i></div><p class="mt-2 mb-0">Task tracking will be available in a later phase.</p></div>
+            <div class="d-flex align-items-start justify-content-between gap-3 flex-wrap">
+                <div><div class="eyebrow">TASK SUMMARY</div><h3 class="h6 mt-1 mb-0">Project tasks</h3></div>
+                <?php if ($canManageProjects): ?><button type="button" class="btn btn-sm btn-primary" id="add-project-task"><i class="fa-solid fa-plus me-1"></i>Add Task</button><?php endif; ?>
+            </div>
+            <div class="project-progress-wrap mt-3"><div class="d-flex justify-content-between small mb-1"><span>Project task completion</span><strong id="project-task-progress-label">0%</strong></div><div class="progress" role="progressbar" aria-label="Project task completion" aria-valuemin="0" aria-valuemax="100"><div id="project-task-progress" class="progress-bar" style="width:0%"></div></div></div>
+            <div class="row row-cols-2 row-cols-md-4 g-2 mt-1" id="project-task-summary">
+                <?php foreach (['total' => 'Total Tasks', 'backlog' => 'Backlog', 'to_do' => 'To Do', 'in_progress' => 'In Progress', 'for_testing' => 'For Testing', 'for_revision' => 'For Revision', 'for_deployment' => 'For Deployment', 'completed' => 'Completed'] as $summaryKey => $summaryLabel): ?>
+                    <div class="col"><div class="task-summary-tile"><div><?= e($summaryLabel) ?></div><strong data-summary="<?= e($summaryKey) ?>">—</strong></div></div>
+                <?php endforeach; ?>
+            </div>
+            <div class="table-responsive mt-3"><table id="project-tasks-table" class="table table-hover align-middle mb-0 w-100"><thead><tr><th>Task Code</th><th>Task Title</th><th>Assigned To</th><th>Priority</th><th>Status</th><th>Start Date</th><th>Target Date</th><th>Blocked</th><th class="text-end">Actions</th></tr></thead><tbody></tbody></table></div>
         </div>
     </div></div>
 </div>

@@ -4,7 +4,8 @@ $user = $user ?? require_auth();
 $pageTitle = $pageTitle ?? 'DPPMS';
 $currentPage = basename($_SERVER['SCRIPT_NAME'] ?? 'dashboard.php');
 $canManageProjects = in_array($user['role'], PROJECT_MANAGER_ROLES, true);
-$needsDataTables = in_array($currentPage, ['users.php', 'projects.php'], true);
+$needsDataTables = in_array($currentPage, ['users.php', 'projects.php', 'tasks.php'], true);
+$needsTaskStyles = in_array($currentPage, ['projects.php', 'tasks.php'], true);
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,6 +17,7 @@ $needsDataTables = in_array($currentPage, ['users.php', 'projects.php'], true);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <?php if ($needsDataTables): ?><link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet"><?php endif; ?>
     <link href="assets/css/app.css" rel="stylesheet">
+    <?php if ($needsTaskStyles): ?><link href="assets/css/tasks.css" rel="stylesheet"><?php endif; ?>
 </head>
 <body class="app-shell">
 <aside class="sidebar" id="sidebar">
@@ -26,7 +28,7 @@ $needsDataTables = in_array($currentPage, ['users.php', 'projects.php'], true);
         <div class="nav-section-label">DEVELOPMENT</div>
         <a class="side-link <?= $currentPage === 'projects.php' ? 'active' : '' ?>" href="projects.php"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></a>
         <a class="side-link disabled-link" href="#" aria-disabled="true"><i class="fa-solid fa-table-columns"></i><span>Development Board</span><span class="coming-soon">Soon</span></a>
-        <a class="side-link disabled-link" href="#" aria-disabled="true"><i class="fa-solid fa-list-check"></i><span>Tasks</span><span class="coming-soon">Soon</span></a>
+        <a class="side-link <?= $currentPage === 'tasks.php' ? 'active' : '' ?>" href="tasks.php"><i class="fa-solid fa-list-check"></i><span>Tasks</span></a>
         <a class="side-link disabled-link" href="#" aria-disabled="true"><i class="fa-solid fa-chart-line"></i><span>Metrics</span><span class="coming-soon">Soon</span></a>
         <div class="nav-section-label">INFRASTRUCTURE</div>
         <a class="side-link disabled-link" href="#" aria-disabled="true"><i class="fa-solid fa-cubes"></i><span>Systems</span><span class="coming-soon">Soon</span></a>
@@ -37,7 +39,7 @@ $needsDataTables = in_array($currentPage, ['users.php', 'projects.php'], true);
         <a class="side-link <?= $currentPage === 'users.php' ? 'active' : '' ?>" href="users.php"><i class="fa-solid fa-users"></i><span>Users</span></a>
         <a class="side-link disabled-link" href="#" aria-disabled="true"><i class="fa-solid fa-gear"></i><span>Settings</span><span class="coming-soon">Soon</span></a>
     </nav>
-    <div class="sidebar-bottom"><div class="sidebar-status"><span class="status-dot"></span>System ready <span class="phase-label">Phase 2A</span></div></div>
+    <div class="sidebar-bottom"><div class="sidebar-status"><span class="status-dot"></span>System ready <span class="phase-label">Phase 2B</span></div></div>
 </aside>
 <div class="main-column">
     <header class="topbar">

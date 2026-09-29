@@ -29,6 +29,16 @@ C:\xampp\php\php.exe scripts\migrate.php
 
 This creates `projects` and `project_members`. No sample projects are seeded. System Administrators and Development Officers can create and edit projects; all active users can view them.
 
+## Phase 2B: tasks
+
+Apply the task and task-history migrations from the project directory:
+
+```powershell
+C:\xampp\php\php.exe scripts\migrate.php
+```
+
+This creates `tasks` and `task_history`. Task codes are allocated while locking the project row, and task updates and their history entries commit together. No task records are seeded.
+
 ## Configuration
 
 See `.env.example` for the local database connection and application URL. Set `SESSION_SECURE_COOKIE=true` only when serving DPPMS over HTTPS. Configure Apache to point its document root at `public/` for production deployments. The bundled XAMPP Apache currently uses PHP 7.2; use `C:\xampp\php\php.exe` for matching CLI behavior. PHP 8+ is recommended for deployment.

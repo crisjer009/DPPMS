@@ -111,6 +111,7 @@ $(function () {
         textField('detail-project-created-at', project.created_at);
         textField('detail-project-updated-at', project.updated_at);
         bootstrap.Modal.getOrCreateInstance(document.getElementById('project-detail-modal')).show();
+        $(document).trigger('dppms:project-opened', [Number(project.id)]);
     }
 
     if (canManage) {

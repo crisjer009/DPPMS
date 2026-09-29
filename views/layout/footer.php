@@ -6,13 +6,15 @@
 <script>window.DPPMS = {
     csrfToken: <?= json_encode(csrf_token()) ?>,
     canManageUsers: <?= json_encode(($user['role'] ?? '') === 'SYSTEM ADMINISTRATOR') ?>,
-    canManageProjects: <?= json_encode(in_array(($user['role'] ?? ''), PROJECT_MANAGER_ROLES, true)) ?>
+    canManageProjects: <?= json_encode(in_array(($user['role'] ?? ''), PROJECT_MANAGER_ROLES, true)) ?>,
+    canManageTasks: <?= json_encode(in_array(($user['role'] ?? ''), TASK_MANAGER_ROLES, true)) ?>
 };</script>
 <script src="assets/js/app.js"></script>
-<?php if (in_array(($currentPage ?? ''), ['users.php', 'projects.php'], true)): ?>
+<?php if (in_array(($currentPage ?? ''), ['users.php', 'projects.php', 'tasks.php'], true)): ?>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <?php endif; ?>
 <?php if (($currentPage ?? '') === 'users.php'): ?><script src="assets/js/users.js"></script><?php endif; ?>
+<?php if (in_array(($currentPage ?? ''), ['projects.php', 'tasks.php'], true)): ?><script src="assets/js/tasks.js"></script><?php endif; ?>
 <?php if (($currentPage ?? '') === 'projects.php'): ?><script src="assets/js/projects.js"></script><?php endif; ?>
 </body>
 </html>

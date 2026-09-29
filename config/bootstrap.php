@@ -47,4 +47,5 @@ require_once BASE_PATH . '/app/helpers/response.php';
 require_once BASE_PATH . '/app/helpers/csrf.php';
 require_once BASE_PATH . '/app/helpers/auth.php';
 require_once BASE_PATH . '/app/helpers/projects.php';
+require_once BASE_PATH . '/app/helpers/tasks.php';
 require_once BASE_PATH . '/config/database.php';
