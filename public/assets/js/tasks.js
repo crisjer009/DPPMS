@@ -16,7 +16,7 @@ $(function () {
         return '<span class="badge ' + style + '">' + escapeHtml(value) + '</span>';
     }
     function statusBadge(value) {
-        const style = { BACKLOG: 'task-status-backlog', 'TO DO': 'task-status-todo', 'IN PROGRESS': 'task-status-progress', 'FOR TESTING': 'task-status-testing', 'FOR REVISION': 'task-status-revision', 'FOR DEPLOYMENT': 'task-status-deployment', COMPLETED: 'task-status-completed' }[value] || 'task-status-backlog';
+        const style = { BACKLOG: 'task-status-backlog', 'TO DO': 'task-status-todo', 'IN PROGRESS': 'task-status-progress', 'FOR TESTING': 'task-status-testing', 'FOR REVISION': 'task-status-revision', 'FOR DEPLOYMENT': 'task-status-deployment', COMPLETED: 'task-status-completed', CANCELLED: 'task-status-cancelled' }[value] || 'task-status-backlog';
         return '<span class="badge ' + style + '">' + escapeHtml(value) + '</span>';
     }
     function dateCell(value) {

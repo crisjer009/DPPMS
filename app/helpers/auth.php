@@ -37,9 +37,14 @@ function refresh_session_user(): void
     if ($user === null) {
         return;
     }
-    $statement = db()->prepare('SELECT id, username, full_name, email, role, status FROM users WHERE id = ?');
-    $statement->execute([$user['id']]);
-    $freshUser = $statement->fetch();
+    try {
+        $statement = db()->prepare('SELECT id, username, full_name, email, role, status FROM users WHERE id = ?');
+        $statement->execute([$user['id']]);
+        $freshUser = $statement->fetch();
+    } catch (Throwable $exception) {
+        app_log('Active session refresh failed: ' . $exception->getMessage());
+        throw new RuntimeException('Unable to verify the active session.');
+    }
     if (!$freshUser || $freshUser['status'] !== 'ACTIVE') {
         logout_user();
         return;
@@ -53,7 +58,8 @@ function logout_user(): void
     $_SESSION = [];
     if (ini_get('session.use_cookies')) {
         $params = session_get_cookie_params();
-        setcookie(session_name(), '', ['expires' => time() - 42000, 'path' => $params['path'], 'domain' => $params['domain'], 'secure' => $params['secure'], 'httponly' => $params['httponly'], 'samesite' => 'Lax']);
+        // PHP 7.2 (bundled XAMPP) accepts the positional signature only.
+        setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
     }
     session_destroy();
 }

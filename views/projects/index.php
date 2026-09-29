@@ -66,7 +66,7 @@
             </div>
             <div class="project-progress-wrap mt-3"><div class="d-flex justify-content-between small mb-1"><span>Project task completion</span><strong id="project-task-progress-label">0%</strong></div><div class="progress" role="progressbar" aria-label="Project task completion" aria-valuemin="0" aria-valuemax="100"><div id="project-task-progress" class="progress-bar" style="width:0%"></div></div></div>
             <div class="row row-cols-2 row-cols-md-4 g-2 mt-1" id="project-task-summary">
-                <?php foreach (['total' => 'Total Tasks', 'backlog' => 'Backlog', 'to_do' => 'To Do', 'in_progress' => 'In Progress', 'for_testing' => 'For Testing', 'for_revision' => 'For Revision', 'for_deployment' => 'For Deployment', 'completed' => 'Completed'] as $summaryKey => $summaryLabel): ?>
+                <?php foreach (['total' => 'Total Tasks', 'backlog' => 'Backlog', 'to_do' => 'To Do', 'in_progress' => 'In Progress', 'for_testing' => 'For Testing', 'for_revision' => 'For Revision', 'for_deployment' => 'For Deployment', 'completed' => 'Completed', 'cancelled' => 'Cancelled'] as $summaryKey => $summaryLabel): ?>
                     <div class="col"><div class="task-summary-tile"><div><?= e($summaryLabel) ?></div><strong data-summary="<?= e($summaryKey) ?>">—</strong></div></div>
                 <?php endforeach; ?>
             </div>

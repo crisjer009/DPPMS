@@ -71,7 +71,8 @@ try {
                               COALESCE(SUM(t.status = 'FOR TESTING'), 0) AS for_testing,
                               COALESCE(SUM(t.status = 'FOR REVISION'), 0) AS for_revision,
                               COALESCE(SUM(t.status = 'FOR DEPLOYMENT'), 0) AS for_deployment,
-                              COALESCE(SUM(t.status = 'COMPLETED'), 0) AS completed
+                              COALESCE(SUM(t.status = 'COMPLETED'), 0) AS completed,
+                              COALESCE(SUM(t.status = 'CANCELLED'), 0) AS cancelled
                        FROM tasks t WHERE t.project_id = ?" . $scopeSql;
         $summaryStatement = db()->prepare($summarySql);
         $summaryStatement->execute(array_merge([(int) $projectId], $scopeParameters));
